@@ -8,6 +8,7 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] RectTransform crosshair;
     [SerializeField] Transform targetPoint;
     [SerializeField] float targetDistance = 100;
+    [SerializeField] AudioClip shootSFX;
 
     bool isFiring = false;
 
@@ -32,6 +33,11 @@ public class PlayerWeapon : MonoBehaviour
 
     void ProcessFiring()
     {
+        if (isFiring)
+        {
+            AudioSource.PlayClipAtPoint(shootSFX, transform.position, 0.5f);
+        }
+
         foreach (GameObject laser in lasers)
         {
             var emissionModule = laser.GetComponent<ParticleSystem>().emission;
